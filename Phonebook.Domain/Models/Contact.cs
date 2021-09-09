@@ -18,7 +18,7 @@ namespace Phonebook.Domain.Models
         public string ImageUrl { get; set; }
         public Contact()
         {
-            Id = new Guid().ToString();
+            Id = Guid.NewGuid().ToString();
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Phonebook.Infrastructure.IRepository
+namespace Phonebook.Infrastructure.Abstractions
 {
     public interface IGenericRepository<T> where T : class
     {
@@ -19,7 +19,7 @@ namespace Phonebook.Infrastructure.IRepository
 
         Task Insert(T entity);
         Task InsertRange(IEnumerable<T> entities);
-        Task Delete(int id);
+        Task Delete(string id);
         void DeleteRange(IEnumerable<T> entities);
         void Update(T entity);
     }
