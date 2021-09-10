@@ -13,6 +13,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Phonebook.Infrastructure;
+using Phonebook.Domain.Configurations;
+using Microsoft.AspNetCore.Identity;
+using Phonebook.Configuration;
 
 namespace Phonebook
 {
@@ -31,6 +34,10 @@ namespace Phonebook
             services.AddDbContext<ApplicationDbContext>(options => 
                 options.UseSqlServer(Configuration.GetConnectionString("default"))
             );
+
+            services.AddAuthentication();
+            services.ConfigureIdentity();
+
             services.AddControllers();
             services.AddCors(options =>
             {
@@ -39,6 +46,8 @@ namespace Phonebook
                         .AllowAnyMethod()
                         .AllowAnyHeader());
             });
+
+            services.AddAutoMapper(typeof(MapperInitializer));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Phonebook", Version = "v1" });

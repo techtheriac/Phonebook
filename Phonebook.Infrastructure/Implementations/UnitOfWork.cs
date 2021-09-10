@@ -19,7 +19,7 @@ namespace Phonebook.Infrastructure.Implementations
         }
 
         public IGenericRepository<Contact> Contacts => 
-            _contacts ??= new GenericRepository<Contact>(_context); 
+            _contacts ??= new GenericRepository<Contact>(_context);
         
         public async Task Save()
         {

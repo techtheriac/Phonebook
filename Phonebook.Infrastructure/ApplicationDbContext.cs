@@ -1,10 +1,12 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Phonebook.Domain.Configurations;
 using Phonebook.Domain.Models;
 
 namespace Phonebook.Infrastructure
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<User>
     {
         private DbSet<Contact> Contacts { get; set; }
 
@@ -15,6 +17,10 @@ namespace Phonebook.Infrastructure
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            base.OnModelCreating(builder);
+
+            builder.ApplyConfiguration(new RoleConfiguration());
+
             builder.Entity<Contact>().HasData(
                 new Contact {                   
                     FirstName = "Folake",
