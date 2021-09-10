@@ -67,5 +67,23 @@ namespace Phonebook.Controllers
                 return Problem($"Something went wrong in {nameof(Register)}", statusCode: 500);
             }
         }
+
+        [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetUser(string id)
+        {
+            try
+            {
+                var user = await _userManager.FindByIdAsync(id);
+                var result = _mapper.Map<UserDto>(user);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, $"Something went wrong in {nameof(GetUser)}");
+                return StatusCode(500, "Internal Server error. Please try again later");
+            }
+        }
     }
 }
