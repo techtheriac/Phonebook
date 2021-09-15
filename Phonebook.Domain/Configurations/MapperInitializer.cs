@@ -15,6 +15,7 @@ namespace Phonebook.Domain.Configurations
         {
             CreateMap<Contact, ContactDto>().ReverseMap();
             CreateMap<User, UserDto>().ReverseMap();
+            CreateMap<User, GetUserDto>().ReverseMap();
         }
     }
 }
